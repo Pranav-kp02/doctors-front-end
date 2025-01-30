@@ -1,0 +1,212 @@
+/* General Reset */
+.main {
+  display: flex;
+}
+.docList-admin-head {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Content Section */
+.content {
+  padding: 2rem;
+  margin: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.75rem;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Name Styling */
+.appoi {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.appoi svg {
+  color: #27ae60;
+  font-size: 1.8rem;
+}
+
+/* Qualification Button Styling */
+.qlfyBtn {
+  margin-left: 0.5rem;
+  padding: 0.35rem 1.25rem;
+  border-radius: 50px;
+  border: 1px solid #3498db;
+  background-color: transparent;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #3498db;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.qlfyBtn:hover {
+  background-color: #3498db;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.qlfyBtn:focus {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+}
+
+/* About Section Styling */
+.about {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 1rem;
+}
+
+.about svg {
+  color: #f39c12;
+  font-size: 1.2rem;
+}
+
+/* Description Styling */
+.disc {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+  max-width: 700px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* Fee Section Styling */
+.fee {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #374151;
+}
+
+.fee2 {
+  color: #4b5563;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.fee2:hover {
+  color: #3498db;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    padding: 1.5rem;
+  }
+
+  .appoi {
+    font-size: 1.25rem;
+  }
+
+  .about {
+    font-size: 0.9rem;
+  }
+
+  .disc {
+    font-size: 0.85rem;
+    max-width: 100%;
+  }
+
+  .fee {
+    font-size: 1rem;
+  }
+}
+/* Select Dropdown Wrapper */
+.selectWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+}
+
+/* Styling for the Select Element */
+.select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  appearance: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+}
+
+/* Custom Arrow for Select */
+.selectWrapper::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #3498db;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+/* Focus and Hover Effects */
+.select:hover,
+.select:focus {
+  border-color: #2980b9;
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+}
+
+.selectWrapper select:focus + ::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Option Styling */
+.select option {
+  background: #fff;
+  color: #333;
+  font-size: 1rem;
+  padding: 10px;
+}
+
+/* Disabled Option */
+.select:disabled {
+  background: #f2f2f2;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .selectWrapper {
+    max-width: 100%;
+  }
+
+  .select {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.85rem;
+  }
+}

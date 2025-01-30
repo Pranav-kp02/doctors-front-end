@@ -1,0 +1,122 @@
+/* Main Container */
+.docList-admin-main {
+  margin: 1.25rem auto;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar */
+.docList-admin-main::-webkit-scrollbar {
+  width: 6px;
+}
+.docList-admin-main::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 3px;
+}
+
+/* Header */
+.docList-admin-head {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Flex Container */
+.docList-admin-div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Individual Doctor Card */
+.docList-admin-map {
+  overflow: hidden;
+  max-width: 16rem;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.docList-admin-map:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Doctor Image */
+.docList-admin-img {
+  width: 100%;
+  object-fit: cover;
+  background-color: #f3f4f6;
+  transition: background-color 0.3s ease;
+}
+.docList-admin-img:hover {
+  background-color: #e0f2fe;
+}
+
+/* Doctor Info */
+.docList-admin-sidePara {
+  padding: 1rem;
+}
+.docList-admin-para1 {
+  color: #111827;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+}
+.docList-admin-para2 {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 0.25rem 0;
+}
+
+/* Availability */
+.docList-admin-input {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+.docList-admin-checkbox {
+  accent-color: #3b82f6;
+}
+.docList-admin-input-paraa {
+  color: #374151;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 0;
+}
+
+/* Empty State */
+.docList-admin-empty {
+  color: #9ca3af;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media (min-width: 640px) {
+  .docList-admin-main {
+    margin: 1.25rem auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}

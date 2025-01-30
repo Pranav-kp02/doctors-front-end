@@ -1,0 +1,110 @@
+/* Add a subtle gradient overlay to the background */
+.loginbackimg {
+  background-image: url("https://technext.github.io/live-doc/v1.0.0/assets/img/gallery/hero-bg.png"),
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+  background-position: top center;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  z-index: 0;
+  filter: blur(8px); /* Subtle blur to make text stand out */
+  transition: filter 0.5s ease;
+}
+
+/* Text title enhancement */
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 64px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px; /* Add spacing between letters for a sleek look */
+  align-items: center;
+  justify-content: center;
+  font-family: "Fjalla One", serif;
+  color: #fff; /* White text for better contrast on the dark background */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Soft shadow to enhance readability */
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.titleContainer:hover {
+  transform: translateY(-10px); /* Slight hover effect for a modern feel */
+}
+
+/* Main container styling */
+.mainContainer {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px; /* Adds some padding for smaller screens */
+  color: #fff;
+  transition: opacity 0.5s ease;
+}
+
+/* Spacing adjustment for better alignment */
+.marginTop {
+  padding-top: 7rem;
+}
+
+/* Style for register/login page switch text */
+.registerPage {
+  font-size: 18px;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.registerPage span {
+  color: #283779;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.registerPage span:hover {
+  color: #5c6bc0; /* Lighter color on hover */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Button and form input enhancements */
+/* input,
+button {
+  padding: 15px 30px;
+  border-radius: 30px;
+  border: 2px solid #283779;
+  font-size: 16px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+input:focus,
+button:hover {
+  background-color: #283779;
+  border-color: #5c6bc0;
+  color: white;
+}
+
+input::placeholder {
+  color: #bbb;
+  opacity: 0.8;
+}
+
+button {
+  background-color: #283779;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5c6bc0;
+} */
