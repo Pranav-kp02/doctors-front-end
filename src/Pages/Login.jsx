@@ -4,8 +4,10 @@ import Register from "../Componets/LoginOrReg/Register";
 import LoginForm from "../Componets/LoginOrReg/LoginForm";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLogReg } from "../REDUX/userAuthenticationSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigator = useNavigate();
   const loginRegister = useSelector(
     (state) => state.userAth.loginRegPage ?? "Login"
   );
@@ -37,6 +39,16 @@ const Login = () => {
             </span>
           </p>
         )}
+        <p className="doctor-login">
+          Are you a Doctor?{" "}
+          <span
+            onClick={() => {
+              navigator("/docLogin");
+            }}
+          >
+            Doctor login
+          </span>
+        </p>
       </div>
     </section>
   );

@@ -18,6 +18,7 @@ import DoctorsList from "./AdminDash/Componets/DoctorsList";
 import AdminDashboad from "./AdminDash/Componets/AdminDashboad";
 import AddDoctors from "./AdminDash/Componets/AddDoctors";
 import DoctorApply from "./Pages/DoctorApply";
+import DoctorLogin from "./DoctorDash/DoctorLogin";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           </Route>
           {/* doctor Apply */}
           <Route path="/doctor-Apply" element={<DoctorApply />} />
+          <Route path="/docLogin" element={<DoctorLogin />} />
         </Routes>
         <Footer />
       </Router>

@@ -77,6 +77,24 @@
   cursor: pointer;
 }
 
+.doctor-login {
+  font-size: 16px;
+  color: #2c3e50; /* Darker color for the doctor's link */
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.doctor-login span {
+  color: #e74c3c; /* Red color for the Doctor's login link */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.doctor-login span:hover {
+  color: #c0392b; /* Darker red color on hover */
+  text-decoration: none; /* Removes underline on hover */
+}
 /* Button and form input enhancements */
 /* input,
 button {

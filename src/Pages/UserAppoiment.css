@@ -88,3 +88,21 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 }
+
+.cancelled-btn {
+  background-color: #ddd; /* Light gray background */
+  color: #777; /* Dark gray text */
+  border: none;
+  cursor: not-allowed;
+  font-weight: bold;
+  padding: 8px 12px;
+  pointer-events: none;
+}
+/* .cancelled-btn {
+  background-color: #ddd; 
+  color: #777; 
+  border: none;
+  cursor: not-allowed;
+  font-weight: bold;
+  padding: 8px 12px;
+} */
