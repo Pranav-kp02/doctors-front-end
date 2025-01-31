@@ -137,7 +137,6 @@ const Appoiment = () => {
       toast.error(errorMessage);
       console.log(errorMessage);
     }
-    console.log(submissionData);
     dispatch(getAppoimentTime(data.time));
   };
 

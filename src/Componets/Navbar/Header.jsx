@@ -4,6 +4,7 @@ import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginInfo } from "../../REDUX/userAuthenticationSlice";
+import { getDoctorLoginInfo } from "../../REDUX/docAthetication";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,10 +12,20 @@ const Header = () => {
   const athetication = useSelector(
     (state) => state.userAth.athetication ?? false
   );
+  const docAthetication = useSelector(
+    (state) => state.DoctorAth.athetication ?? false
+  );
 
   const adminDash = useSelector((state) => state.userAth.user ?? []);
 
   const handleLogOut = () => {
+    dispatch(
+      getDoctorLoginInfo({
+        doctor: [],
+        athetication: false,
+        token: null,
+      })
+    );
     dispatch(
       getLoginInfo({
         user: [],
@@ -49,10 +60,16 @@ const Header = () => {
             <Nav.Link as={Link} to={"/about-us"} className="listStyle">
               About Us
             </Nav.Link>
-            <Nav.Link as={Link} to={"/userAppoiments"} className="listStyle">
-              Appoiments
-            </Nav.Link>
-            {athetication ? (
+            {docAthetication ? (
+              <Nav.Link as={Link} to={"/userAppoiments"} className="listStyle">
+                DashBoard
+              </Nav.Link>
+            ) : (
+              <Nav.Link as={Link} to={"/userAppoiments"} className="listStyle">
+                Appoiments
+              </Nav.Link>
+            )}
+            {athetication || docAthetication ? (
               <div className="dropdown">
                 <svg
                   stroke="currentColor"
@@ -68,12 +85,14 @@ const Header = () => {
 
                 <div className="drop">
                   <div className="drop-list">
-                    <p
-                      onClick={() => navigate("userProfile")}
-                      className="lists-drop-down "
-                    >
-                      My Profile
-                    </p>
+                    {!docAthetication && (
+                      <p
+                        onClick={() => navigate("userProfile")}
+                        className="lists-drop-down "
+                      >
+                        My Profile
+                      </p>
+                    )}
                     {adminDash.role === "admin" && (
                       <p
                         onClick={() => navigate("admin/dashboard")}

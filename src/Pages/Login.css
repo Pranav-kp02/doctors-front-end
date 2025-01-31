@@ -1,128 +1,64 @@
-/* Add a subtle gradient overlay to the background */
+/* Elegant Gradient Background */
 .loginbackimg {
-  background-image: url("https://technext.github.io/live-doc/v1.0.0/assets/img/gallery/hero-bg.png"),
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
-  background-position: top center;
+  background-image: linear-gradient(
+      rgba(40, 55, 121, 0.7),
+      rgba(92, 107, 192, 0.8)
+    ),
+    url("https://technext.github.io/live-doc/v1.0.0/assets/img/gallery/hero-bg.png");
+  background-position: center;
   background-size: cover;
-  position: absolute;
+  position: fixed;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  overflow: hidden;
-  will-change: transform, opacity, filter;
-  backface-visibility: hidden;
-  background-repeat: no-repeat;
-  z-index: 0;
-  filter: blur(8px); /* Subtle blur to make text stand out */
-  transition: filter 0.5s ease;
+  z-index: -1;
+  filter: blur(5px);
+  transition: filter 0.3s ease;
 }
 
-/* Text title enhancement */
-.titleContainer {
-  display: flex;
-  flex-direction: column;
-  font-size: 64px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px; /* Add spacing between letters for a sleek look */
-  align-items: center;
-  justify-content: center;
-  font-family: "Fjalla One", serif;
-  color: #fff; /* White text for better contrast on the dark background */
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Soft shadow to enhance readability */
-  z-index: 1;
-  transition: transform 0.3s ease;
-}
-
-.titleContainer:hover {
-  transform: translateY(-10px); /* Slight hover effect for a modern feel */
-}
-
-/* Main container styling */
+/* Refined Container Styling */
 .mainContainer {
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 2rem;
   position: relative;
   z-index: 1;
-  padding: 0 20px; /* Adds some padding for smaller screens */
-  color: #fff;
-  transition: opacity 0.5s ease;
 }
 
-/* Spacing adjustment for better alignment */
-.marginTop {
-  padding-top: 7rem;
-}
-
-/* Style for register/login page switch text */
-.registerPage {
-  font-size: 18px;
-  color: #fff;
-  margin-top: 20px;
-}
-
-.registerPage span {
-  color: #283779;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.registerPage span:hover {
-  color: #5c6bc0; /* Lighter color on hover */
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.doctor-login {
-  font-size: 16px;
-  color: #2c3e50; /* Darker color for the doctor's link */
-  font-weight: bold;
+/* Elegant Title Styling */
+.titleContainer {
+  color: white;
   text-align: center;
-  margin-top: 15px;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Interactive Span Styles */
+.registerPage span,
 .doctor-login span {
-  color: #e74c3c; /* Red color for the Doctor's login link */
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
+  transition: color 0.3s ease;
   text-decoration: underline;
 }
 
+.registerPage span:hover,
 .doctor-login span:hover {
-  color: #c0392b; /* Darker red color on hover */
-  text-decoration: none; /* Removes underline on hover */
-}
-/* Button and form input enhancements */
-/* input,
-button {
-  padding: 15px 30px;
-  border-radius: 30px;
-  border: 2px solid #283779;
-  font-size: 16px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  color: #ffd700;
 }
 
-input:focus,
-button:hover {
-  background-color: #283779;
-  border-color: #5c6bc0;
-  color: white;
+/* Responsive and Clean Layout */
+@media (max-width: 768px) {
+  .titleContainer {
+    font-size: 2rem;
+  }
 }
-
-input::placeholder {
-  color: #bbb;
-  opacity: 0.8;
-}
-
-button {
-  background-color: #283779;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #5c6bc0;
-} */

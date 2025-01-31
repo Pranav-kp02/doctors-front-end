@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import * as formik from "formik";
 import * as yup from "yup";
@@ -7,15 +7,18 @@ import { getLoginInfo } from "../../REDUX/userAuthenticationSlice";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
-import "./LoginForm.css";
+import styles from "./LoginForm.module.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function LoginForm() {
   const { Formik } = formik;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
   const schema = yup.object().shape({
-    email: yup.string().required(),
-    password: yup.string().required(),
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup.string().required("Password is required"),
   });
 
   const handleForm = async (logData) => {
@@ -54,58 +57,89 @@ function LoginForm() {
       console.log(errorMessage);
     }
   };
+
   return (
-    <Container fluid className="registration-container">
-      <Row>
-        <Col xs={8} sm={6} md={6} lg={4} className="mx-auto my-3">
-          <Formik
-            validationSchema={schema}
-            onSubmit={handleForm}
-            initialValues={{
-              email: "",
-              password: "",
-            }}
-          >
-            {({ handleSubmit, handleChange, values, touched, errors }) => (
-              <Form noValidate onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="name@example.com"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    isValid={touched.email && !errors.email}
-                    isInvalid={!!errors.email}
-                  />
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.email}
-                  </Form.Control.Feedback>
-                </Form.Group>
+    <Container fluid className={styles.registrationContainer}>
+      <Row className={styles.formRow}>
+        <Col className={styles.formColumn}>
+          <div className={styles.formWrapper}>
+            {/* <h2 className={styles.formTitle}>Welcome Back</h2>
+            <p className={styles.formSubtitle}>Sign in to continue</p> */}
+            <Formik
+              validationSchema={schema}
+              onSubmit={handleForm}
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+            >
+              {({ handleSubmit, handleChange, values, touched, errors }) => (
+                <Form noValidate onSubmit={handleSubmit}>
+                  <Form.Group className={styles.formGroup}>
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter your email"
+                      name="email"
+                      className={styles.formControl}
+                      value={values.email}
+                      onChange={handleChange}
+                      isValid={touched.email && !errors.email}
+                      isInvalid={!!errors.email}
+                    />
+                    <Form.Control.Feedback className={styles.validFeedback}>
+                      Looks good!
+                    </Form.Control.Feedback>
+                    <Form.Control.Feedback
+                      type="invalid"
+                      className={styles.invalidFeedback}
+                    >
+                      {errors.email}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter Your Password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    isValid={touched.password && !errors.password}
-                    isInvalid={!!errors.password}
-                  />
-                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.password}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                  <Form.Group className={styles.formGroup}>
+                    <Form.Label>Password</Form.Label>
+                    <div className={styles.passwordWrapper}>
+                      <Form.Control
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter your password"
+                        name="password"
+                        className={styles.formControl}
+                        value={values.password}
+                        onChange={handleChange}
+                        isValid={touched.password && !errors.password}
+                        isInvalid={!!errors.password}
+                      />
+                      <span
+                        className={styles.passwordToggle}
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      </span>
+                    </div>
+                    <Form.Control.Feedback className={styles.validFeedback}>
+                      Looks good!
+                    </Form.Control.Feedback>
+                    <Form.Control.Feedback
+                      type="invalid"
+                      className={styles.invalidFeedback}
+                    >
+                      {errors.password}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-                <Button type="submit">login</Button>
-              </Form>
-            )}
-          </Formik>
+                  {/* <div className={styles.forgotPassword}>
+                    <a href="/forgot-password">Forgot Password?</a>
+                  </div> */}
+
+                  <Button type="submit" className={styles.submitButton}>
+                    Login
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </div>
         </Col>
       </Row>
     </Container>

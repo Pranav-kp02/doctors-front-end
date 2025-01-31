@@ -4,6 +4,7 @@ import adminSlice from "./adminSlice";
 import userAuthentication from "./userAuthenticationSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import docAthetication from "./docAthetication";
 
 const persistConfig = {
   key: "root",
@@ -12,6 +13,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+  DoctorAth: docAthetication,
   userAth: userAuthentication,
   doctors: doctorsSlice,
   Admin: adminSlice,

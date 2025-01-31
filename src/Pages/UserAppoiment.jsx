@@ -14,7 +14,7 @@ const MyAppoiment = () => {
   const handleUserCancel = async (appoimentID) => {
     try {
       const res = await API.put(
-        `/appoimentCancel/${appoimentID}`,
+        `/cancelAppoiment/${appoimentID}`,
         {
           cancel: true, // Sending the new availability state
         },

@@ -4,7 +4,10 @@ import * as formik from "formik";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styles from "./DoctorLogin.module.css"; // Import the CSS module
+import styles from "./DoctorLogin.module.css";
+import { API } from "../AXIOS";
+import toast from "react-hot-toast";
+import { getDoctorLoginInfo } from "../REDUX/docAthetication";
 
 function DoctorLogin() {
   const { Formik } = formik;
@@ -15,10 +18,41 @@ function DoctorLogin() {
     password: yup.string().required(),
   });
 
-  const handleForm = async () => {
-    // handle form submission logic here
+  const handleForm = async (logData) => {
+    try {
+      const res = await API.post(
+        "/docLog",
+        {
+          email: logData.email,
+          password: logData.password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      if (res.data.success) {
+        toast.success(res.data.message);
+        dispatch(
+          getDoctorLoginInfo({
+            doctor: res.data.user,
+            athetication: true,
+            token: res.data.token,
+          })
+        );
+        // navigate("/userProfile");
+      } else {
+        toast.error(res.data.message);
+        console.log(res.data.message);
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong";
+      toast.error(errorMessage);
+      console.log(errorMessage);
+    }
   };
-
   return (
     <Container fluid className={styles.registrationContainer}>
       <Row>
