@@ -1,17 +1,53 @@
 import React, { useEffect } from "react";
-import style from "./AllAppoimnets.module.css";
+import style from "./DoctorAllAppoimnets.module.css";
 import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { allAppoimentData } from "../../REDUX/adminSlice";
+import { getAllDoctorAppoiment } from "../../REDUX/docAthetication";
 
-function AllAppoimnets() {
+function DoctorAllAppoimnets() {
   const dispatch = useDispatch();
-  const appoimentData = useSelector((state) => state.Admin.allApppoiment ?? []);
+  const appoimentData = useSelector(
+    (state) => state.DoctorAth.allAppoiment ?? []
+  );
+
+  const handleComplete = async (appId) => {
+    try {
+      const res = await API.put(
+        `/appoimentCompleted/${appId}`,
+        {
+          complete: "completed", // Sending the new availability state
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (res.data.success) {
+        const completedAppoiment = appoimentData.map((appoi) => {
+          if (appoi._id === appId) {
+            return { ...appoi, status: "completed" };
+          }
+          return appoi;
+        });
+        dispatch(getAllDoctorAppoiment(completedAppoiment));
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to update availability";
+      toast.error(errorMessage);
+      console.error(errorMessage);
+    }
+  };
   const handleCancel = async (appId, date, time) => {
     try {
       const res = await API.put(
-        `/AdminAppoimentCancel/${appId}`,
+        `/appoimentCancel/${appId}`,
         {
           cancel: true,
           status: "cancelled",
@@ -30,7 +66,7 @@ function AllAppoimnets() {
           }
           return appoi;
         });
-        dispatch(allAppoimentData(cancelledAppoiment));
+        dispatch(getAllDoctorAppoiment(cancelledAppoiment));
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);
@@ -44,18 +80,17 @@ function AllAppoimnets() {
       console.error(errorMessage);
     }
   };
+
   useEffect(() => {
     const getAllAppoimentData = async () => {
       try {
-        const res = await API.get("/allAppoiment", {
+        const res = await API.get("/docAllAppoiment", {
           withCredentials: true,
         });
         if (res.data.success) {
-          dispatch(allAppoimentData(res.data.appoiment));
-          console.log(res.data);
+          dispatch(getAllDoctorAppoiment(res.data.allAppoiment));
         } else {
           toast.error(res.data.message);
-          console.log(res.data.message);
         }
       } catch (error) {
         const errorMessage =
@@ -63,11 +98,11 @@ function AllAppoimnets() {
           error.message ||
           "Something went wrong";
         toast.error(errorMessage);
-        console.log(errorMessage);
       }
     };
     getAllAppoimentData();
   }, [dispatch]);
+
   return (
     <div className={style.mainDiv}>
       <p className={style.heading}>All Appointments</p>
@@ -153,8 +188,26 @@ function AllAppoimnets() {
 
             <div className={style.dataItem}>
               <span className={style.mobileLabel}>Action:</span>
-              {ele.status === "pending" && (
+              {ele.status === "pending" ? (
                 <div className={style.actionButtons}>
+                  <button
+                    className={`${style.actionButton} ${style.completeButton}`}
+                    onClick={() => handleComplete(ele._id)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Complete
+                  </button>
                   <button
                     className={`${style.actionButton} ${style.cancelButton}`}
                     onClick={() =>
@@ -180,7 +233,7 @@ function AllAppoimnets() {
                     Cancel
                   </button>
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
         ))}
@@ -189,4 +242,4 @@ function AllAppoimnets() {
   );
 }
 
-export default AllAppoimnets;
+export default DoctorAllAppoimnets;

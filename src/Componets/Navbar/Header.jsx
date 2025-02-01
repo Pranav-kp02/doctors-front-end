@@ -61,7 +61,11 @@ const Header = () => {
               About Us
             </Nav.Link>
             {docAthetication ? (
-              <Nav.Link as={Link} to={"/userAppoiments"} className="listStyle">
+              <Nav.Link
+                as={Link}
+                to={"/doctor/dashboard"}
+                className="listStyle"
+              >
                 DashBoard
               </Nav.Link>
             ) : (

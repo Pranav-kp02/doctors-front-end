@@ -11,12 +11,15 @@ const MyAppoiment = () => {
     (state) => state.userAth.allUserAppoiments ?? []
   );
 
-  const handleUserCancel = async (appoimentID) => {
+  const handleUserCancel = async (appoimentID, date, time) => {
     try {
       const res = await API.put(
         `/cancelAppoiment/${appoimentID}`,
         {
-          cancel: true, // Sending the new availability state
+          cancel: true,
+          status: "cancelled",
+          bookDate: date,
+          bookTime: time,
         },
         {
           withCredentials: true,
@@ -26,7 +29,7 @@ const MyAppoiment = () => {
       if (res.data.success) {
         const cancelledAppoiment = appoimentDetails.map((appoi) => {
           if (appoi._id === appoimentID) {
-            return { ...appoi, isCancelled: true };
+            return { ...appoi, isCancelled: true, status: "cancelled" };
           }
           return appoi;
         });
@@ -69,6 +72,9 @@ const MyAppoiment = () => {
     getAlluserAppoiment();
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <div className="container">
       <p className="myAppoi-header">My Appoiment</p>
@@ -84,10 +90,18 @@ const MyAppoiment = () => {
             </div>
             <div className="myAppoi-content">
               <p className="myAppoi-name">{item.docData.fullName}</p>
-              <p>{item.docData.speciality}</p>
+              <p>
+                {" "}
+                <span className="myAppoi-span">speciality: </span>
+                {item.docData.speciality}
+              </p>
               <p className="myAppoi-p-span">
                 <span className="myAppoi-span">Status: </span>
-                {item.status}
+                {item.status === "cancelled" ? (
+                  <span style={{ color: "red" }}>cancelled</span>
+                ) : (
+                  <span> {item.status}</span>
+                )}
               </p>
               {/* <p className="myAppoi-address">Address:</p>
               <p className="myAppoi-address-line">{item.address.line1}</p>
@@ -98,20 +112,34 @@ const MyAppoiment = () => {
               </p>
             </div>
             <div></div>
-            <div className="myAppoi-div-btn">
-              {item.isCancelled ? (
-                <button className="myAppoi-cancel-btn cancelled-btn" disabled>
-                  Cancelled
+            {item.status === "completed" ? (
+              <div className="myAppoi-div-btn">
+                <button className="myAppoi-cancel-btn completed-btn" disabled>
+                  completed
                 </button>
-              ) : (
-                <button
-                  onClick={() => handleUserCancel(item._id)}
-                  className="myAppoi-cancel-btn"
-                >
-                  Cancel Appointment
-                </button>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="myAppoi-div-btn">
+                {item.isCancelled ? (
+                  <button className="myAppoi-cancel-btn cancelled-btn" disabled>
+                    Cancelled
+                  </button>
+                ) : (
+                  <button
+                    onClick={() =>
+                      handleUserCancel(
+                        item._id,
+                        item.slotBookedDate,
+                        item.slotBookedTime
+                      )
+                    }
+                    className="myAppoi-cancel-btn"
+                  >
+                    Cancel Appointment
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>

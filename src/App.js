@@ -18,7 +18,11 @@ import DoctorsList from "./AdminDash/Componets/DoctorsList";
 import AdminDashboad from "./AdminDash/Componets/AdminDashboad";
 import AddDoctors from "./AdminDash/Componets/AddDoctors";
 import DoctorApply from "./Pages/DoctorApply";
-import DoctorLogin from "./DoctorDash/DoctorLogin";
+import DoctorLogin from "./DoctorDash/DocComponets/DoctorLogin";
+import DoctorApp from "./DoctorDash/DoctorApp";
+import DoctorDashboad from "./DoctorDash/DocComponets/DoctorDashboad";
+import DoctorAllAppoimnets from "./DoctorDash/DocComponets/DoctorAllAppoimnets";
+import DoctorProfile from "./DoctorDash/DocComponets/DoctorProfile";
 
 function App() {
   return (
@@ -47,6 +51,12 @@ function App() {
           {/* doctor Apply */}
           <Route path="/doctor-Apply" element={<DoctorApply />} />
           <Route path="/docLogin" element={<DoctorLogin />} />
+          {/* doctor dashBoard */}
+          <Route path="/doctor" element={<DoctorApp />}>
+            <Route path="dashboard" element={<DoctorDashboad />} />
+            <Route path="doc-appoiment" element={<DoctorAllAppoimnets />} />
+            <Route path="doctors-profile" element={<DoctorProfile />} />
+          </Route>
         </Routes>
         <Footer />
       </Router>

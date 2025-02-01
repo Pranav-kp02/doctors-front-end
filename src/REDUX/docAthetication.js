@@ -4,6 +4,7 @@ const initialState = {
   doctor: [],
   athetication: false,
   token: null,
+  allAppoiment: [],
 };
 
 const docAthetication = createSlice({
@@ -15,8 +16,12 @@ const docAthetication = createSlice({
       state.athetication = action.payload.athetication;
       state.token = action.payload.token;
     },
+    getAllDoctorAppoiment: (state, action) => {
+      state.allAppoiment = action.payload;
+    },
   },
 });
 
-export const { getDoctorLoginInfo } = docAthetication.actions;
+export const { getDoctorLoginInfo, getAllDoctorAppoiment } =
+  docAthetication.actions;
 export default docAthetication.reducer;

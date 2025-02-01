@@ -5,9 +5,9 @@ import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./DoctorLogin.module.css";
-import { API } from "../AXIOS";
+import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
-import { getDoctorLoginInfo } from "../REDUX/docAthetication";
+import { getDoctorLoginInfo } from "../../REDUX/docAthetication";
 
 function DoctorLogin() {
   const { Formik } = formik;
@@ -39,7 +39,7 @@ function DoctorLogin() {
             token: res.data.token,
           })
         );
-        // navigate("/userProfile");
+        navigate("/doctor/dashboard");
       } else {
         toast.error(res.data.message);
         console.log(res.data.message);

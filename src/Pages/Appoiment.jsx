@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Appoiment.css";
 import RelatedDoctor from "../Componets/Appoiment/RelatedDoctor";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,7 @@ import { API } from "../AXIOS";
 const Appoiment = () => {
   const { docId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   dispatch(doctorsDetails(docId));
   dispatch(getRelatedDoc(docId));
@@ -125,6 +126,7 @@ const Appoiment = () => {
       });
 
       if (res.data.success) {
+        // navigate("/userAppoiments");
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);

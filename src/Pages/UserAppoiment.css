@@ -98,6 +98,16 @@
   padding: 8px 12px;
   pointer-events: none;
 }
+
+.completed-btn {
+  background-color: #71ad73; /* Light gray background */
+  color: #e6e6e6; /* Dark gray text */
+  border: none;
+  cursor: not-allowed;
+  font-weight: bold;
+  padding: 8px 12px;
+  pointer-events: none;
+}
 /* .cancelled-btn {
   background-color: #ddd; 
   color: #777; 
