@@ -95,6 +95,11 @@ const MyAppoiment = () => {
                 <span className="myAppoi-span">speciality: </span>
                 {item.docData.speciality}
               </p>
+              <p>
+                {" "}
+                <span className="myAppoi-span">fee: ₹</span>
+                {item.docData.fees}
+              </p>
               <p className="myAppoi-p-span">
                 <span className="myAppoi-span">Status: </span>
                 {item.status === "cancelled" ? (

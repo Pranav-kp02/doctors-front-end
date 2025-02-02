@@ -5,6 +5,7 @@ const initialState = {
   athetication: false,
   token: null,
   allAppoiment: [],
+  docDash: [],
 };
 
 const docAthetication = createSlice({
@@ -19,9 +20,19 @@ const docAthetication = createSlice({
     getAllDoctorAppoiment: (state, action) => {
       state.allAppoiment = action.payload;
     },
+    getDoctorDashData: (state, action) => {
+      state.docDash = action.payload;
+    },
+    updateDoctordata: (state, action) => {
+      state.doctor = { ...state.doctor, ...action.payload };
+    },
   },
 });
 
-export const { getDoctorLoginInfo, getAllDoctorAppoiment } =
-  docAthetication.actions;
+export const {
+  getDoctorLoginInfo,
+  getAllDoctorAppoiment,
+  getDoctorDashData,
+  updateDoctordata,
+} = docAthetication.actions;
 export default docAthetication.reducer;

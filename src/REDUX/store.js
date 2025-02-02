@@ -9,7 +9,7 @@ import docAthetication from "./docAthetication";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["userAth"], // only navigation will be persisted
+  whitelist: ["userAth", "DoctorAth", "doctors"], // only navigation will be persisted
 };
 
 const rootReducer = combineReducers({

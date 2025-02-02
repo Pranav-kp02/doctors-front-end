@@ -32,8 +32,7 @@ const Appoiment = () => {
   useEffect(() => {
     const getAvailableSlot = async () => {
       let today = new Date();
-      today.setSeconds(0, 0); // Reset seconds and milliseconds for accuracy
-
+      today.setSeconds(0, 0);
       const slots = [];
 
       for (let i = 0; i < 7; i++) {
@@ -41,83 +40,67 @@ const Appoiment = () => {
         currentDate.setDate(today.getDate() + i);
 
         let endTime = new Date(currentDate);
-        endTime.setHours(21, 0, 0, 0); // Set end time to 9 PM
+        endTime.setHours(21, 0, 0, 0);
 
         if (i === 0) {
-          // If it's today, adjust the start time
           let now = new Date();
           currentDate.setHours(
             now.getHours() >= 10 ? now.getHours() + 1 : 10,
             now.getMinutes() >= 30 ? 30 : 0
           );
         } else {
-          // Set start time for other days
           currentDate.setHours(10, 0, 0, 0); // 10:00 AM
         }
 
         let timeSlot = [];
         while (currentDate < endTime) {
-          // Format time in "11:00 am" format
           let formattedTime = currentDate.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
-            hour12: true, // AM/PM formatting
+            hour12: true,
           });
 
-          // Format date in "Wed Jan 29 2025" format
           let formattedDate = currentDate.toLocaleDateString("en-GB", {
-            weekday: "short", // "Wed"
-            year: "numeric", // "2025"
-            month: "short", // "Jan"
-            day: "numeric", // "29"
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
           });
 
           timeSlot.push({
-            // Store formatted date and time as strings
-            dateTime: formattedDate, // "Wed Jan 29 2025"
-            time: formattedTime, // "11:00 am"
-            // Store these for easier display later
+            dateTime: formattedDate,
+            time: formattedTime,
+
             dayOfWeek: currentDate.getDay(),
             dayOfMonth: currentDate.getDate(),
           });
 
-          currentDate.setMinutes(currentDate.getMinutes() + 30); // Increment by 30 minutes
+          currentDate.setMinutes(currentDate.getMinutes() + 30);
         }
 
-        slots.push(timeSlot); // Add the day's slots to the list
+        slots.push(timeSlot);
       }
 
-      dispatch(getAppoimentSlot(slots)); // Dispatch slots to Redux store
+      dispatch(getAppoimentSlot(slots));
     };
 
     getAvailableSlot();
   }, [dispatch]);
 
-  // Format today's date for default value
-  const today = new Date();
-  const formattedToday = today.toLocaleDateString("en-GB", {
-    weekday: "short", // "Wed"
-    year: "numeric", // "2025"
-    month: "short", // "Jan"
-    day: "numeric", // "29"
-  });
-
   const { handleSubmit, setValue } = useForm({
     defaultValues: {
-      date: formattedToday, // Set formatted today's date here as a string
+      date: null,
       time: null,
     },
   });
 
-  // Handle appointment submission
   const onSubmit = async (data) => {
-    if (!data.time) {
-      toast.error("enter time");
+    if (!data.time || !data.date) {
+      toast.error("Please select both date and time");
+      return;
     }
-    // Convert the date to ISO string for API submission (if needed)
     const submissionData = {
       ...data,
-      date: data.date, // Keep the formatted date for API submission
     };
 
     try {
@@ -126,7 +109,7 @@ const Appoiment = () => {
       });
 
       if (res.data.success) {
-        // navigate("/userAppoiments");
+        navigate("/userAppoiments");
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);
@@ -139,6 +122,7 @@ const Appoiment = () => {
       toast.error(errorMessage);
       console.log(errorMessage);
     }
+
     dispatch(getAppoimentTime(data.time));
   };
 
@@ -162,8 +146,7 @@ const Appoiment = () => {
                     key={index}
                     onClick={() => {
                       dispatch(getAppoimentIndex(index));
-                      // When a day is selected, set the date value as string
-                      setValue("date", ele[0].dateTime); // Store formatted date string
+                      setValue("date", ele[0].dateTime);
                     }}
                     className={`week-slot-appoi ${
                       docAppoimentIndex === index
@@ -185,7 +168,7 @@ const Appoiment = () => {
                     key={index}
                     onClick={() => {
                       dispatch(getAppoimentTime(items.time));
-                      setValue("time", items.time); // Set the selected time in the form
+                      setValue("time", items.time);
                     }}
                     className={`time-slot-appoi ${
                       items.time === docAppoimentTime
@@ -193,7 +176,7 @@ const Appoiment = () => {
                         : "not-selected-times"
                     }`}
                   >
-                    {items.time.toLowerCase()}
+                    {items.time}
                   </p>
                 ))}
             </div>
