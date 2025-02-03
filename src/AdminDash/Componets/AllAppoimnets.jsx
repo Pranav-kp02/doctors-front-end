@@ -8,6 +8,7 @@ import { allAppoimentData } from "../../REDUX/adminSlice";
 function AllAppoimnets() {
   const dispatch = useDispatch();
   const appoimentData = useSelector((state) => state.Admin.allApppoiment ?? []);
+
   const handleCancel = async (appId, date, time) => {
     try {
       const res = await API.put(
@@ -44,6 +45,7 @@ function AllAppoimnets() {
       console.error(errorMessage);
     }
   };
+
   useEffect(() => {
     const getAllAppoimentData = async () => {
       try {

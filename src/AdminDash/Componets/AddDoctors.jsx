@@ -1,51 +1,52 @@
-import React, { useEffect } from "react";
-import { AiFillCheckCircle } from "react-icons/ai";
-import { IoMdInformationCircleOutline } from "react-icons/io";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./AddDoctors.module.css";
 import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
 import { getApplyDoctorData } from "../../REDUX/adminSlice";
-import { useForm } from "react-hook-form";
 
 function AddDoctors() {
   const dispatch = useDispatch();
+  const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const docDetails = useSelector((state) => state.Admin.docApplyData ?? []);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onsubmit = (data, doctor) => {
-    // Log selected role and doctor's details
-    toast.success(`Filter Applied: ${data.role} for ${doctor.fullName}`);
-
-    // Example usage of doctor data
-    console.log("Selected Doctor Data:", doctor._id);
-    console.log("Selected Role:", data.role);
-
-    // Call an API or perform actions based on doctor data
-    handleDoctorApproval(doctor._id, data.role);
-  };
-
-  const handleDoctorApproval = async (doctorId, role) => {
+  const handleCancel = async (doctorId, role) => {
+    role = "Doctor";
     try {
       const res = await API.post(
         `/docApplyUpdate/${doctorId}`,
         { role },
         { withCredentials: true }
       );
+
       if (res.data.success) {
         toast.success("Doctor approved successfully");
         const updatedDoctors = docDetails.filter((doc) => doc._id !== doctorId);
-        dispatch(getApplyDoctorData(updatedDoctors)); // Refresh the data
+        dispatch(getApplyDoctorData(updatedDoctors));
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error.message);
+      toast.error("Error approving doctor");
+    }
+  };
+
+  const handleDelete = async (docId) => {
+    console.log(docId);
+
+    try {
+      const res = await API.delete(`/applyDocDel/${docId}`, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        toast.success("Doctor approved successfully");
+        const updatedDoctors = docDetails.filter((doc) => doc._id !== docId);
+        dispatch(getApplyDoctorData(updatedDoctors));
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
       toast.error("Error approving doctor");
     }
   };
@@ -72,66 +73,129 @@ function AddDoctors() {
     getAddDoctorData();
   }, [dispatch]);
 
+  const toggleDropdown = (index) => {
+    setOpenDropdownIndex(openDropdownIndex === index ? null : index);
+  };
+
   return (
-    <div className="main">
-      <h1 className="docList-admin-head">Doctors Management</h1>
-
-      {docDetails.length === 0 ? (
-        <p className={style.nodatamessage}>No doctor applications available.</p>
-      ) : (
-        docDetails.map((ele, index) => (
-          <div key={index} className={style.content}>
-            <p className={style.appoiName}>
-              {ele.fullName}
-              <AiFillCheckCircle />
-            </p>
-            <p>Email: {ele.email}</p>
-
-            <div className={style.qlfy}>
-              <p>
-                {ele.degree} - {ele.speciality}
-                <button className={style.qlfyBtn}>
-                  {ele.experience} years
-                </button>
-              </p>
-            </div>
-
-            {/* About section */}
-            <div>
-              <p className={style.about}>
-                About
-                <IoMdInformationCircleOutline />
-              </p>
-              <p className={style.disc}>{ele.about}</p>
-            </div>
-
-            <p className={style.fee}>
-              Appointment fee: <span className={style.fee2}>${ele.fees}</span>
-            </p>
-
-            {/* Filter section inside the map loop */}
-            <form
-              onSubmit={handleSubmit((data) => onsubmit(data, ele))}
-              className={style.filterContainer}
+    <div className={style.mainDiv}>
+      <p className={style.heading}>Doctor Applications</p>
+      <div className={style.divContainer}>
+        <div className={style.gridContainer}>
+          <p>#</p>
+          <p>Name</p>
+          <p>Experience</p>
+          <p>Specialty</p>
+          <p>Email</p>
+          <p>Fee</p>
+          <p>Action</p>
+        </div>
+        {docDetails.map((ele, index) => (
+          <div key={ele._id}>
+            <div
+              className={`${style.divIndex} ${
+                openDropdownIndex === index ? style.activeRow : ""
+              }`}
             >
-              <select
-                className={style.select}
-                {...register("role", { required: "This field is required" })}
+              <div className={style.dataItem}>
+                <span className={style.mobileLabel}>#:</span>
+                <span className={style.hideOnMobile}>{index + 1}</span>
+              </div>
+
+              <div className={style.dataItem}>
+                <span className={style.mobileLabel}>Name:</span>
+                <div className={style.userDiv}>
+                  <img
+                    className={style.imgUser}
+                    src={ele.image}
+                    alt={ele.fullName}
+                  />
+                  <p>{ele.fullName}</p>
+                </div>
+              </div>
+
+              <div className={style.dataItem}>
+                <span className={style.mobileLabel}>Experience:</span>
+                <p>{ele.experience} Years</p>
+              </div>
+
+              <div className={style.dataItem}>
+                <span className={style.mobileLabel}>Speciality:</span>
+                <p>{ele.speciality}</p>
+              </div>
+
+              <div className={style.dataItem}>
+                <span className={style.mobileLabel}>Email:</span>
+                <p>{ele.email}</p>
+              </div>
+
+              <div className={style.dataItem}>
+                <span className={style.mobileLabel}>Fee:</span>
+                <p>₹{ele.fees}</p>
+              </div>
+
+              <div className={style.dataItem}>
+                <span className={style.mobileLabel}>Action:</span>
+                <div className={style.actionButtons}>
+                  <button
+                    className={`${style.actionButton} ${style.completeButton}`}
+                    onClick={() => handleCancel(ele._id, ele.role)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Approve
+                  </button>
+                  <button
+                    className={`${style.actionButton} ${style.cancelButton}`}
+                    onClick={() => handleDelete(ele._id)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Delete
+                  </button>
+                </div>
+              </div>
+
+              <div
+                className={style.dropdownToggle}
+                onClick={() => toggleDropdown(index)}
               >
-                <option value="Doctor">Doctor</option>
-              </select>
+                {openDropdownIndex === index ? "less" : "more"}
+              </div>
+            </div>
 
-              {errors.role && (
-                <span className={style.error}>{errors.role.message}</span>
-              )}
-
-              <button className={style.filterBtn} type="submit">
-                APPROVE
-              </button>
-            </form>
+            {openDropdownIndex === index && (
+              <div className={style.extraDetailsDropdown}>
+                <div className={style.dropdownContent}>
+                  <div>
+                    <strong>About:</strong> {ele.about || "N/A"}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        ))
-      )}
+        ))}
+      </div>
     </div>
   );
 }

@@ -4,9 +4,11 @@ import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { getDashData } from "../../REDUX/adminSlice";
+import { useNavigate } from "react-router-dom";
 
 function AdminDashboad() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dashData = useSelector((state) => state.Admin.dashData ?? []);
 
   useEffect(() => {
@@ -42,7 +44,10 @@ function AdminDashboad() {
     dashData && (
       <div className="m-5">
         <div className={style.topdiv}>
-          <div className={style.topicon}>
+          <div
+            className={style.topicon}
+            onClick={() => navigate("/admin/doctors-list")}
+          >
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -60,7 +65,10 @@ function AdminDashboad() {
             </div>
           </div>
 
-          <div className={style.topicon}>
+          <div
+            className={style.topicon}
+            onClick={() => navigate("/admin/all-appoiment")}
+          >
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -78,7 +86,10 @@ function AdminDashboad() {
             </div>
           </div>
 
-          <div className={style.topicon}>
+          <div
+            className={style.topicon}
+            // onClick={() => navigate("/admin/all-appoiment")}
+          >
             <svg
               stroke="currentColor"
               fill="currentColor"

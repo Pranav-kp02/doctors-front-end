@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginInfo } from "../../REDUX/userAuthenticationSlice";
 import { getDoctorLoginInfo } from "../../REDUX/docAthetication";
+import { API } from "../../AXIOS";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,8 +19,10 @@ const Header = () => {
   );
 
   const adminDash = useSelector((state) => state.userAth.user ?? []);
+  const token = useSelector((state) => state.userAth.token ?? []);
+  console.log(token);
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     dispatch(
       getDoctorLoginInfo({
         doctor: [],
@@ -26,14 +30,33 @@ const Header = () => {
         token: null,
       })
     );
-    dispatch(
-      getLoginInfo({
-        user: [],
-        athetication: false,
-        token: null,
-      })
-    );
-    navigate("/");
+
+    try {
+      const res = await API.post(`/logOut`, {
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        dispatch(
+          getLoginInfo({
+            user: [],
+            athetication: false,
+            token: null,
+          })
+        );
+        navigate("/");
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Something went wrong";
+      toast.error(errorMessage);
+      console.log(errorMessage);
+    }
   };
 
   return (

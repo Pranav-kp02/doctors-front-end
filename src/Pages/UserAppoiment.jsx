@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { API } from "../AXIOS";
 import { getUserAppoiment } from "../REDUX/userAuthenticationSlice";
+import { useNavigate } from "react-router-dom";
 
 const MyAppoiment = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const appoimentDetails = useSelector(
     (state) => state.userAth.allUserAppoiments ?? []
   );
@@ -48,6 +50,10 @@ const MyAppoiment = () => {
     }
   };
 
+  const handleDetils = (docid) => {
+    navigate(`/appoiment/${docid}`);
+  };
+
   useEffect(() => {
     const getAlluserAppoiment = async () => {
       try {
@@ -81,10 +87,10 @@ const MyAppoiment = () => {
       <div>
         {appoimentDetails.map((item, index) => (
           <div className="myAppoi-doc-card" key={index}>
-            <div>
+            <div onClick={() => handleDetils(item.docData._id)}>
               <img
                 className="myAppoi-img"
-                src={item.docData.fullName}
+                src={item.docData.image}
                 alt={item.docData.fullName}
               />
             </div>
