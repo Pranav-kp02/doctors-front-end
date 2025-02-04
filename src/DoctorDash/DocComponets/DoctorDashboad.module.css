@@ -75,103 +75,179 @@
 }
 
 /* Enhanced appointment card styles */
-.dashbooklatediv {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  background-color: #ffffff;
-  border-radius: 1rem;
+.mainDiv {
+  width: 100%;
+  padding: 1.25rem;
+}
+
+.heading {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.divContainer {
+  background-color: white;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
 }
 
-.dashbooklatediv:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-color: #3b82f6;
+/* Header row */
+.gridContainer {
+  background-color: #f9fafb;
+  padding: 1rem;
+  font-weight: 500;
+  color: #374151;
+  display: none; /* Hidden on mobile */
 }
 
-.dashbookimg {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 9999px;
-  object-fit: cover;
-  border: 3px solid #3b82f6;
-  padding: 2px;
-  background-color: #ffffff;
+@media (min-width: 768px) {
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 2fr 2fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
 }
 
-.dasbookdetails {
-  flex: 1;
+/* Data row */
+.divIndex {
+  padding: 1rem;
+  color: #6b7280;
+  border-top: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
-.dashbookpara1 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 0.5rem 0;
+@media (min-width: 768px) {
+  .divIndex {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 2fr 2fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
 }
 
-.dashbookpara2 {
-  font-size: 0.95rem;
-  color: #4b5563;
-  margin: 0.25rem 0;
+.divIndex:hover {
+  background-color: #f9fafb;
+}
+
+/* Mobile labels */
+.mobileLabel {
+  font-weight: 500;
+  color: #374151;
+  display: inline-block;
+  width: 100px;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .mobileLabel {
+    display: none;
+  }
+}
+
+/* User info */
+.userDiv {
   display: flex;
   align-items: center;
+  gap: 0.75rem;
+}
+
+.imgUser {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+/* Hide index on mobile */
+.hideOnMobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hideOnMobile {
+    display: block;
+  }
+}
+
+/* Action buttons */
+.actionButtons {
+  display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.dashbookhr {
-  margin: 1rem 0 0.5rem 0;
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
   border: none;
-  border-top: 1px solid #e5e7eb;
 }
 
-.nodatamessage {
-  text-align: center;
-  padding: 3rem;
-  background-color: #f9fafb;
-  border-radius: 0.75rem;
-  color: #6b7280;
-  font-size: 1.1rem;
-  margin-top: 1.5rem;
-  border: 2px dashed #e5e7eb;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .dashbooklatediv {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
-  }
-
-  .dashbookimg {
-    width: 4rem;
-    height: 4rem;
-  }
-
-  .dasbookdetails {
-    width: 100%;
-  }
-}
-
-/* Status colors */
-.dashbookpara2[data-status="completed"] {
+.completeButton {
+  background-color: #d1fae5;
   color: #059669;
 }
 
-.dashbookpara2[data-status="pending"] {
+.completeButton:hover {
+  background-color: #a7f3d0;
+}
+
+.cancelButton {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.cancelButton:hover {
+  background-color: #fecaca;
+}
+
+/* Status badges */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  width: fit-content;
+}
+
+.statusPending {
+  background-color: #fef3c7;
   color: #d97706;
 }
 
-.dashbookpara2[data-status="cancelled"] {
+.statusCompleted {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.cancelledBadge {
+  background-color: #fee2e2;
   color: #dc2626;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+/* Data item wrapper for mobile */
+.dataItem {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .dataItem {
+    display: block;
+  }
 }

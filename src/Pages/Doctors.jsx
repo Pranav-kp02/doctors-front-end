@@ -14,7 +14,6 @@ const Doctors = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let { specialty } = useParams();
-  console.log(specialty);
 
   const doctors = useSelector((state) => state.doctors.filteredDoctor ?? []);
 

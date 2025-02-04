@@ -6,6 +6,7 @@ const initialState = {
   token: null,
   allAppoiment: [],
   docDash: [],
+  appoimentFIlter: [],
 };
 
 const docAthetication = createSlice({
@@ -26,6 +27,16 @@ const docAthetication = createSlice({
     updateDoctordata: (state, action) => {
       state.doctor = { ...state.doctor, ...action.payload };
     },
+    filterAppoiment: (state, action) => {
+      const status = action.payload;
+      if (status) {
+        state.appoimentFIlter = state.allAppoiment.filter(
+          (ele) => ele.status === status
+        );
+      } else {
+        state.appoimentFIlter = state.allAppoiment;
+      }
+    },
   },
 });
 
@@ -34,5 +45,6 @@ export const {
   getAllDoctorAppoiment,
   getDoctorDashData,
   updateDoctordata,
+  filterAppoiment,
 } = docAthetication.actions;
 export default docAthetication.reducer;

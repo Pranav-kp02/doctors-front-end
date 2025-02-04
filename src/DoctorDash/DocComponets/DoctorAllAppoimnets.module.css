@@ -28,7 +28,7 @@
 @media (min-width: 768px) {
   .gridContainer {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 2fr 2fr 1fr 1fr;
+    grid-template-columns: 0.5fr 2fr 1fr 2fr 1fr 2fr 1fr;
     gap: 1rem;
     align-items: center;
   }
@@ -47,7 +47,7 @@
 @media (min-width: 768px) {
   .divIndex {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 2fr 2fr 1fr 1fr;
+    grid-template-columns: 0.5fr 2fr 1fr 2fr 1fr 2fr 1fr;
     gap: 1rem;
     align-items: center;
   }
@@ -173,4 +173,123 @@
   .dataItem {
     display: block;
   }
+}
+
+.filterContainer {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.filterButton {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filterButton:hover {
+  background-color: #2563eb;
+}
+
+.filterDropdown {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  display: none;
+  flex-direction: column;
+}
+
+.filterDropdown.show {
+  display: flex;
+}
+
+.filterOption {
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.filterOption:hover {
+  background-color: #f3f4f6;
+}
+
+/* More Dropdown Button */
+.moreDropdownButton {
+  padding: 0.375rem 0.75rem;
+  background-color: #e5e7eb;
+  color: #4b5563;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  position: relative;
+}
+
+/* More Dropdown Menu */
+.moreDropdownMenu {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  display: none;
+  flex-direction: column;
+}
+
+.moreDropdownMenu.show {
+  display: flex;
+}
+
+/* Dropdown Option */
+.moreDropdownOption {
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.moreDropdownOption:hover {
+  background-color: #f3f4f6;
+}
+
+.dropdownToggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.extraDetailsDropdown {
+  width: 100%;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dropdownContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  color: #4b5563;
+}
+
+.dropdownContent div {
+  background-color: #ffffff;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
 }

@@ -55,6 +55,10 @@ function App() {
           <Route path="/doctor" element={<DoctorApp />}>
             <Route path="dashboard" element={<DoctorDashboad />} />
             <Route path="doc-appoiment" element={<DoctorAllAppoimnets />} />
+            <Route
+              path="doc-appoiment/:status"
+              element={<DoctorAllAppoimnets />}
+            />
             <Route path="doctors-profile" element={<DoctorProfile />} />
           </Route>
         </Routes>

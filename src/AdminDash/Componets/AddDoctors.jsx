@@ -32,8 +32,6 @@ function AddDoctors() {
   };
 
   const handleDelete = async (docId) => {
-    console.log(docId);
-
     try {
       const res = await API.delete(`/applyDocDel/${docId}`, {
         withCredentials: true,

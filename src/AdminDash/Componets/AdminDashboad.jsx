@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { getDashData } from "../../REDUX/adminSlice";
 import { useNavigate } from "react-router-dom";
+import LatestBookingsAdmin from "./LatestBookingsAdmin";
 
 function AdminDashboad() {
   const dispatch = useDispatch();
@@ -108,53 +109,8 @@ function AdminDashboad() {
           </div>
         </div>
         {/* {appoi} */}
-        <div>
-          <div className={style.dashappoiment}>
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              stroke-width="0"
-              viewBox="0 0 512 512"
-              height="2rem"
-              width="2rem"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"></path>
-            </svg>
-            <p className={style.dashpara}>Latest Bookings</p>
-          </div>
-        </div>
 
-        {dashData.latestAppoiment && dashData.latestAppoiment.length > 0 ? (
-          dashData.latestAppoiment.map((ele, index) => (
-            <div className={style.dashbooklatediv} key={index}>
-              <img
-                className={style.dashbookimg}
-                src={ele.docData.image || "default-doctor-image.jpg"}
-                alt={ele.docData.fullName || "Doctor"}
-              />
-              <div className={style.dasbookdetails}>
-                <p className={style.dashbookpara1}> {ele.docData.fullName}</p>
-                <p className={style.dashbookpara2}>
-                  Patient: {ele.userData.fullName}
-                </p>
-                <p className={style.dashbookpara2}>
-                  Date: {ele.slotBookedDate} | Time: {ele.slotBookedTime}
-                </p>
-                <p
-                  className={style.dashbookpara2}
-                  data-status={ele.status.toLowerCase()}
-                >
-                  Status: {ele.status}
-                </p>
-                <p className={style.dashbookpara2}>Fees: ₹{ele.fees}</p>
-                <hr className={style.dashbookhr} />
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className={style.nodatamessage}>No latest bookings available.</p>
-        )}
+        <LatestBookingsAdmin bookings={dashData.latestAppoiment} />
       </div>
     )
   );
