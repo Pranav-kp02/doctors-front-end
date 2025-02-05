@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./AllAppoimnets.module.css";
 import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { allAppoimentData } from "../../REDUX/adminSlice";
+import { adminFilterAppoiment, allAppoimentData } from "../../REDUX/adminSlice";
 
 function AllAppoimnets() {
   const dispatch = useDispatch();
   const appoimentData = useSelector((state) => state.Admin.allApppoiment ?? []);
+  const appoimentFilterData = useSelector(
+    (state) => state.Admin.aFilterappoiment ?? []
+  );
+
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleCancel = async (appId, date, time) => {
     try {
@@ -46,6 +51,10 @@ function AllAppoimnets() {
     }
   };
 
+  const handleFilter = (str) => {
+    dispatch(adminFilterAppoiment(str));
+  };
+
   useEffect(() => {
     const getAllAppoimentData = async () => {
       try {
@@ -54,6 +63,7 @@ function AllAppoimnets() {
         });
         if (res.data.success) {
           dispatch(allAppoimentData(res.data.appoiment));
+          dispatch(adminFilterAppoiment());
           console.log(res.data);
         } else {
           toast.error(res.data.message);
@@ -72,7 +82,62 @@ function AllAppoimnets() {
   }, [dispatch]);
   return (
     <div className={style.mainDiv}>
-      <p className={style.heading}>All Appointments</p>
+      <p className={style.heading}>
+        All Appointments
+        <div className={style.filterContainer}>
+          <button
+            className={style.filterButton}
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            Filter
+          </button>
+
+          {/* Filter Dropdown */}
+          <div
+            className={`${style.filterDropdown} ${
+              showDropdown ? style.show : ""
+            }`}
+          >
+            <span
+              className={style.filterOption}
+              onClick={() => {
+                handleFilter("");
+                setShowDropdown(false);
+              }}
+            >
+              All
+            </span>
+            <span
+              className={style.filterOption}
+              onClick={() => {
+                handleFilter("pending");
+                setShowDropdown(false);
+              }}
+            >
+              Pending
+            </span>
+            <span
+              className={style.filterOption}
+              onClick={() => {
+                handleFilter("completed");
+                setShowDropdown(false);
+              }}
+            >
+              Completed
+            </span>
+            <span
+              className={style.filterOption}
+              onClick={() => {
+                handleFilter("cancelled");
+                setShowDropdown(false);
+              }}
+            >
+              Cancelled
+            </span>
+          </div>
+        </div>
+      </p>
+
       <div className={style.divContainer}>
         <div className={style.gridContainer}>
           <p>#</p>
@@ -83,7 +148,7 @@ function AllAppoimnets() {
           <p>Fee</p>
           <p>Action</p>
         </div>
-        {appoimentData.map((ele, index) => (
+        {appoimentFilterData.map((ele, index) => (
           <div className={style.divIndex} key={index}>
             <div className={style.dataItem}>
               <span className={style.mobileLabel}>#:</span>

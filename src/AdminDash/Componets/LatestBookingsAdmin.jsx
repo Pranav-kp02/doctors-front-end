@@ -25,7 +25,7 @@ const LatestBookingsAdmin = ({ bookings = [] }) => {
             <div key={index} className={styles.bookingRow}>
               <div className={styles.patientColumn}>
                 <img
-                  src={booking.userData.image || "/api/placeholder/32/32"}
+                  src={booking.userData.image}
                   alt=""
                   className={styles.patientImage}
                 />

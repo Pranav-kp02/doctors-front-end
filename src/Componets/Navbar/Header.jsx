@@ -3,7 +3,7 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getLoginInfo } from "../../REDUX/userAuthenticationSlice";
+import { LogOutUser } from "../../REDUX/userAuthenticationSlice";
 import { getDoctorLoginInfo } from "../../REDUX/docAthetication";
 import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
@@ -19,8 +19,8 @@ const Header = () => {
   );
 
   const adminDash = useSelector((state) => state.userAth.user ?? []);
-  const token = useSelector((state) => state.userAth.token ?? []);
-  console.log(token);
+  // const token = useSelector((state) => state.userAth.token ?? []);
+  // console.log(token);
 
   const handleLogOut = async () => {
     dispatch(
@@ -32,16 +32,21 @@ const Header = () => {
     );
 
     try {
-      const res = await API.post(`/logOut`, {
-        withCredentials: true,
-      });
+      const res = await API.post(
+        `/logOut`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
 
       if (res.data.success) {
         dispatch(
-          getLoginInfo({
+          LogOutUser({
             user: [],
             athetication: false,
             token: null,
+            allUserAppoiments: [],
           })
         );
         navigate("/");

@@ -205,11 +205,6 @@ function DoctorAllAppoimnets() {
               }`}
               key={index}
             >
-              {/* <div
-              className={`${style.divIndex} ${
-                openDropdownIndex === index ? style.activeRow : ""
-              }`}
-            > */}
               <div className={style.dataItem}>
                 <span className={style.mobileLabel}>#:</span>
                 <span className={style.hideOnMobile}>{index + 1}</span>

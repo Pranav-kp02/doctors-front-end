@@ -26,6 +26,9 @@ const Appoiment = () => {
   const docAppoimentSlot = useSelector((state) => state.doctors.appoimentSlots);
   const docAppoimentIndex = useSelector((state) => state.doctors.slotIndex);
   const docAppoimentTime = useSelector((state) => state.doctors.slotTime);
+  const authentication = useSelector(
+    (state) => state.userAth.athetication ?? false
+  );
 
   const daysInWeek = ["SUN", "MON", "TUE", "WED", "THUS", "FRI", "SAT"];
 
@@ -95,6 +98,10 @@ const Appoiment = () => {
   });
 
   const onSubmit = async (data) => {
+    if (!authentication) {
+      toast.error("Please Login");
+      return;
+    }
     if (!data.time || !data.date) {
       toast.error("Please select both date and time");
       return;

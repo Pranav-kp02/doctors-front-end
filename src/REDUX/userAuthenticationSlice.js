@@ -26,6 +26,12 @@ const userAuthentication = createSlice({
     getUserAppoiment: (state, action) => {
       state.allUserAppoiments = action.payload;
     },
+    LogOutUser: (state, action) => {
+      state.user = action.payload.user;
+      state.athetication = action.payload.athetication;
+      state.token = action.payload.token;
+      state.allUserAppoiments = action.payload.allUserAppoiments;
+    },
   },
 });
 
@@ -34,5 +40,6 @@ export const {
   changeLogReg,
   getUserUpdateData,
   getUserAppoiment,
+  LogOutUser,
 } = userAuthentication.actions;
 export default userAuthentication.reducer;

@@ -4,9 +4,11 @@
 }
 
 .heading {
+  display: flex;
   margin-bottom: 1rem;
   font-size: 1.25rem;
   font-weight: 500;
+  gap: 10px;
 }
 
 .divContainer {
@@ -173,4 +175,55 @@
   .dataItem {
     display: block;
   }
+}
+
+/* filter */
+
+.filterContainer {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.filterButton {
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filterButton:hover {
+  background-color: #2563eb;
+}
+
+.filterDropdown {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  display: none;
+  flex-direction: column;
+}
+
+.filterDropdown.show {
+  display: flex;
+}
+
+.filterOption {
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.filterOption:hover {
+  background-color: #f3f4f6;
 }

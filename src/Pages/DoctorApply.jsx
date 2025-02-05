@@ -24,11 +24,17 @@ function DoctorApply() {
   const [imagePreview, setImagePreview] = useState(null);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]); // Append each field to FormData
+    });
 
     try {
       const res = await API.post(`/docReg`, data, {
         withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
       if (res.data.success) {
         toast.success(res.data.message);
