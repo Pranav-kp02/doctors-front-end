@@ -89,7 +89,7 @@ function AdminDashboad() {
 
           <div
             className={style.topicon}
-            // onClick={() => navigate("/admin/all-appoiment")}
+            onClick={() => navigate("/admin/user-list")}
           >
             <svg
               stroke="currentColor"

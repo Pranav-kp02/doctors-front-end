@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import "./DoctorApply.css"; // Add your styles here
+import "./DoctorApply.css";
 import { API } from "../AXIOS";
 import toast from "react-hot-toast";
 
@@ -24,10 +24,10 @@ function DoctorApply() {
   const [imagePreview, setImagePreview] = useState(null);
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]); // Append each field to FormData
-    });
+    // const formData = new FormData();
+    // Object.keys(data).forEach((key) => {
+    //   formData.append(key, data[key]); // Append each field to FormData
+    // });
 
     try {
       const res = await API.post(`/docReg`, data, {

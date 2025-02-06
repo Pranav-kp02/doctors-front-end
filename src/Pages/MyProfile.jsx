@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { assets } from "../assets_frontend/assets";
 import "./MyProfile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -10,6 +9,7 @@ import toast from "react-hot-toast";
 const MyProfile = () => {
   const [isEdit, setEdit] = useState(false);
   const userDetails = useSelector((state) => state.userAth.user ?? {});
+
   const dispatch = useDispatch();
 
   const {
@@ -56,11 +56,7 @@ const MyProfile = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="profile-main container">
-        <img
-          className="profile-img"
-          src={userDetails.image || assets.upload_area}
-          alt="Profile"
-        />
+        <img className="profile-img" src={userDetails.image} alt="Profile" />
         {isEdit ? (
           <input
             className="prof-name-input"

@@ -6,6 +6,8 @@ const initialState = {
   allDoctors: [],
   allApppoiment: [],
   aFilterappoiment: [],
+  userDetails: [],
+  userDataSolo: [],
 };
 
 const adminSlice = createSlice({
@@ -34,6 +36,12 @@ const adminSlice = createSlice({
         state.aFilterappoiment = state.allApppoiment;
       }
     },
+    getAllUserDetails: (state, action) => {
+      state.userDetails = action.payload;
+    },
+    getUserData: (state, action) => {
+      state.userDataSolo = action.payload;
+    },
   },
 });
 
@@ -43,5 +51,7 @@ export const {
   AllDoctorData,
   allAppoimentData,
   adminFilterAppoiment,
+  getAllUserDetails,
+  getUserData,
 } = adminSlice.actions;
 export default adminSlice.reducer;

@@ -23,6 +23,8 @@ import DoctorApp from "./DoctorDash/DoctorApp";
 import DoctorDashboad from "./DoctorDash/DocComponets/DoctorDashboad";
 import DoctorAllAppoimnets from "./DoctorDash/DocComponets/DoctorAllAppoimnets";
 import DoctorProfile from "./DoctorDash/DocComponets/DoctorProfile";
+import UserList from "./AdminDash/Componets/UserList";
+import UserDetailsPage from "./AdminDash/Componets/UserDetailsPage";
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
             <Route path="all-appoiment" element={<AllAppoimnets />} />
             <Route path="add-doctors" element={<AddDoctors />} />
             <Route path="doctors-list" element={<DoctorsList />} />
+            <Route path="user-list" element={<UserList />} />
+            <Route path="/admin/user-list/:uid" element={<UserDetailsPage />} />
           </Route>
           {/* doctor Apply */}
           <Route path="/doctor-Apply" element={<DoctorApply />} />

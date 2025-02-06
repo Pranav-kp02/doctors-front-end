@@ -1,0 +1,196 @@
+/* Container Styling */
+.container {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Wrapper Styling */
+.wrapper {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  border: 1px solid #e5e7eb;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header Section */
+.header {
+  padding: 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* User Details Section */
+.userDetails {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* User Image Styling */
+.imageWrapper {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.userImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+}
+
+.info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.infoItem {
+  font-size: 1.1rem;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.infoItem strong {
+  color: #111827;
+}
+
+.infoItem span {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* Ban Button Styling */
+.banButton {
+  padding: 0.7rem 1.5rem;
+  background-color: #ef4444;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 150px;
+  margin-top: 2rem;
+  align-self: flex-start;
+}
+
+.banButton:hover {
+  background-color: #dc2626;
+}
+
+.banButton:active {
+  transform: scale(0.98);
+}
+
+.banButton:disabled {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+  }
+
+  .userDetails {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info {
+    gap: 1rem;
+  }
+
+  .banButton {
+    width: 100%;
+  }
+}
+
+/* appoiemt */
+/* Table Container */
+.tableContainer {
+  margin-top: 2rem;
+}
+
+.tableHeader {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+}
+
+.tableColumn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tableColumn span {
+  font-weight: 500;
+}
+
+.status {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  color: white;
+}
+
+.status.active {
+  background-color: #22c55e;
+}
+
+.status.inactive {
+  background-color: #ef4444;
+}
+
+.noAppointments {
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* Responsive Design for Table */
+@media (max-width: 768px) {
+  .tableRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+}
