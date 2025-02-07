@@ -63,19 +63,19 @@ const DoctorProfile = () => {
       </div>
 
       <div className={styles.mainContent}>
-        {/* Profile Image Section */}
-        <div className={styles.profileImageSection}>
-          <div className={styles.imageContainer}>
-            <div className={styles.imagePlaceholder}>
-              <span>👤</span>
-            </div>
-            <span className={styles.availableBadge}>Available</span>
-          </div>
-        </div>
-
         {/* Content Section */}
         <div className={styles.contentSection}>
           <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Profile Image Section */}
+            <div className={styles.profileImageSection}>
+              <div className={styles.imageContainer}>
+                <div className={styles.imagePlaceholder}>
+                  <img src={defaultValues.image} alt="docimg" />
+                </div>
+                <span className={styles.availableBadge}>Available</span>
+              </div>
+            </div>
+
             <div className={styles.infoGrid}>
               {/* Personal Information */}
               <div className={styles.infoGroup}>

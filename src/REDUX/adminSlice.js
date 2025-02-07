@@ -42,6 +42,9 @@ const adminSlice = createSlice({
     getUserData: (state, action) => {
       state.userDataSolo = action.payload;
     },
+    banuser: (state, action) => {
+      state.userDataSolo.user.active = action.payload;
+    },
   },
 });
 
@@ -53,5 +56,6 @@ export const {
   adminFilterAppoiment,
   getAllUserDetails,
   getUserData,
+  banuser,
 } = adminSlice.actions;
 export default adminSlice.reducer;

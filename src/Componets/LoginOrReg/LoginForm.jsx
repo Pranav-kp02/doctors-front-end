@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import * as formik from "formik";
 import * as yup from "yup";
@@ -58,6 +58,9 @@ function LoginForm() {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <Container fluid className={styles.registrationContainer}>
       <Row className={styles.formRow}>

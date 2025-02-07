@@ -45,6 +45,7 @@ function DoctorAllAppoimnets() {
           return appoi;
         });
         dispatch(getAllDoctorAppoiment(completedAppoiment));
+        dispatch(filterAppoiment());
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);
@@ -81,6 +82,7 @@ function DoctorAllAppoimnets() {
           return appoi;
         });
         dispatch(getAllDoctorAppoiment(cancelledAppoiment));
+        dispatch(filterAppoiment());
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);

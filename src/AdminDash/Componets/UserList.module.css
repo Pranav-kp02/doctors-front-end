@@ -236,3 +236,13 @@
     flex-direction: row;
   }
 }
+
+.userBan {
+  border: 1px solid red;
+  font-size: xx-small;
+  border-radius: 99px;
+  background-color: red;
+  margin-left: 5px;
+  color: white;
+  padding: 2px;
+}

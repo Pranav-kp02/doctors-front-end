@@ -12,16 +12,23 @@ import { useForm } from "react-hook-form";
 import "./DoctorApply.css";
 import { API } from "../AXIOS";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function DoctorApply() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm();
   const [submitted, setSubmitted] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
+
+  const adminCheck = useSelector((state) => state.userAth.user?.role ?? null);
+  console.log(adminCheck);
 
   const onSubmit = async (data) => {
     // const formData = new FormData();
@@ -38,6 +45,10 @@ function DoctorApply() {
       });
       if (res.data.success) {
         toast.success(res.data.message);
+
+        if (adminCheck === "admin") {
+          navigate("/admin/add-doctors");
+        }
       } else {
         toast.error(res.data.message);
       }
@@ -50,6 +61,8 @@ function DoctorApply() {
       console.log(errorMessage);
     }
     setSubmitted(true);
+    reset();
+    setImagePreview(null);
   };
 
   const handleImageUpload = (event) => {

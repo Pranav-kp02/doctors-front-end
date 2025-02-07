@@ -69,6 +69,9 @@ const UserList = () => {
                       )}
                       <span className={styles.userName}>
                         {user.user.fullName}
+                        {user.user.active === "inActive" && (
+                          <span className={styles.userBan}>Banned</span>
+                        )}
                       </span>
                     </div>
                   </td>

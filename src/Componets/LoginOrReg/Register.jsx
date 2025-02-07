@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as formik from "formik";
 import * as yup from "yup";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
@@ -52,6 +52,10 @@ const Register = () => {
       console.log(errorMessage);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <Container>
       <Row>

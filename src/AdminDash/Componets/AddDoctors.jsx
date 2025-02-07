@@ -4,9 +4,11 @@ import style from "./AddDoctors.module.css";
 import { API } from "../../AXIOS";
 import toast from "react-hot-toast";
 import { getApplyDoctorData } from "../../REDUX/adminSlice";
+import { useNavigate } from "react-router-dom";
 
 function AddDoctors() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const docDetails = useSelector((state) => state.Admin.docApplyData ?? []);
 
@@ -38,7 +40,7 @@ function AddDoctors() {
       });
 
       if (res.data.success) {
-        toast.success("Doctor approved successfully");
+        toast.success("Deleted successfully");
         const updatedDoctors = docDetails.filter((doc) => doc._id !== docId);
         dispatch(getApplyDoctorData(updatedDoctors));
       } else {
@@ -77,7 +79,10 @@ function AddDoctors() {
 
   return (
     <div className={style.mainDiv}>
-      <p className={style.heading}>Doctor Applications</p>
+      <div className={style.headDiv}>
+        <p className={style.heading}>Doctor Applications</p>
+        <button onClick={() => navigate("/doctor-Apply")}>Add doctor</button>
+      </div>
       <div className={style.divContainer}>
         <div className={style.gridContainer}>
           <p>#</p>

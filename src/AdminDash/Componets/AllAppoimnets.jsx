@@ -37,6 +37,7 @@ function AllAppoimnets() {
           return appoi;
         });
         dispatch(allAppoimentData(cancelledAppoiment));
+        dispatch(adminFilterAppoiment());
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);
