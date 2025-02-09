@@ -23,14 +23,14 @@ const Header = () => {
   // console.log(token);
 
   const handleLogOut = async () => {
-    dispatch(
-      LogOutUser({
-        user: [],
-        athetication: false,
-        token: null,
-        allUserAppoiments: [],
-      })
-    );
+    // dispatch(
+    //   LogOutUser({
+    //     user: [],
+    //     athetication: false,
+    //     token: null,
+    //     allUserAppoiments: [],
+    //   })
+    // );
     dispatch(
       getDoctorLoginInfo({
         doctor: [],
