@@ -86,11 +86,11 @@ const UserList = () => {
                       >
                         {user.completedCount} - Completed
                       </span>
-                      <span
+                      {/* <span
                         className={`${styles.badge} ${styles.badgePending}`}
                       >
                         {user.penCount} - Pending
-                      </span>
+                      </span> */}
                       <span
                         className={`${styles.badge} ${styles.badgeCancelled}`}
                       >

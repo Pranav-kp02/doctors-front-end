@@ -1,26 +1,26 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUserDetails } from "../../REDUX/adminSlice";
 import { API } from "../../AXIOS";
 import { toast } from "react-hot-toast";
 import styles from "./DocPatiens.module.css";
-import { useNavigate } from "react-router-dom";
+import { getPatientData } from "../../REDUX/docAthetication";
 
 const DocPatiens = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userDetails = useSelector((state) => state.Admin.userDetails ?? []);
+  const userDetails = useSelector(
+    (state) => state.DoctorAth.patientDetails ?? []
+  );
 
-  const handleViewDetails = (uid) => {
-    navigate(`/admin/user-list/${uid}`);
-  };
+  const docId = useSelector((state) => state.DoctorAth.doctor?.id ?? []);
 
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const res = await API.get("/allUsers", { withCredentials: true });
+        const res = await API.get(`/viewAllPations/${docId}`, {
+          withCredentials: true,
+        });
         if (res.data.success) {
-          dispatch(getAllUserDetails(res.data.userData));
+          dispatch(getPatientData(res.data.data));
         } else {
           toast.error(res.data.message);
         }
@@ -33,7 +33,7 @@ const DocPatiens = () => {
       }
     };
     getUserData();
-  }, [dispatch]);
+  }, [dispatch, docId]);
 
   return (
     <div className={styles.container}>
@@ -64,7 +64,7 @@ const DocPatiens = () => {
                         />
                       ) : (
                         <div className={styles.defaultUserIcon}>
-                          {user.user.fullName.charAt(0)}
+                          {user.user.fullName}
                         </div>
                       )}
                       <span className={styles.userName}>
@@ -97,15 +97,6 @@ const DocPatiens = () => {
                         {user.cancelledCount} - Cancelled
                       </span>
                     </div>
-                  </td>
-
-                  <td className={styles.tableCell}>
-                    <button
-                      onClick={() => handleViewDetails(user.user._id)}
-                      className={styles.viewButton}
-                    >
-                      View Details
-                    </button>
                   </td>
                 </tr>
               ))

@@ -111,7 +111,17 @@ const MyAppoiment = () => {
                 {item.status === "cancelled" ? (
                   <span style={{ color: "red" }}>cancelled</span>
                 ) : (
-                  <span> {item.status}</span>
+                  <div>
+                    {item.status === "pending" && (
+                      <span className="statusPending">Pending</span>
+                    )}
+                    {item.status === "approve" && (
+                      <span className="statusApproved">Approved</span>
+                    )}
+                    {item.status === "completed" && (
+                      <span className="statusCompleted">Completed</span>
+                    )}
+                  </div>
                 )}
               </p>
               {/* <p className="myAppoi-address">Address:</p>

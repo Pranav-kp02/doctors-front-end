@@ -25,6 +25,41 @@ function DoctorAllAppoimnets() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
 
+  const handleApprove = async (appId) => {
+    try {
+      const res = await API.put(
+        `/appoimentApprove/${appId}`,
+        {
+          approve: "approve", // Sending the new availability state
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (res.data.success) {
+        const completedAppoiment = appoimentData.map((appoi) => {
+          if (appoi._id === appId) {
+            return { ...appoi, status: "approve" };
+          }
+          return appoi;
+        });
+        dispatch(getAllDoctorAppoiment(completedAppoiment));
+        dispatch(filterAppoiment());
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to update availability";
+      toast.error(errorMessage);
+      console.error(errorMessage);
+    }
+  };
+
   const handleComplete = async (appId) => {
     try {
       const res = await API.put(
@@ -243,15 +278,17 @@ function DoctorAllAppoimnets() {
                     Cancelled
                   </span>
                 ) : (
-                  <span
-                    className={`${style.statusBadge} ${
-                      ele.status === "completed"
-                        ? style.statusCompleted
-                        : style.statusPending
-                    }`}
-                  >
-                    {ele.status}
-                  </span>
+                  <div>
+                    {ele.status === "pending" && (
+                      <span className={style.statusPending}>Pending</span>
+                    )}
+                    {ele.status === "approve" && (
+                      <span className={style.statusApproved}>Approved</span>
+                    )}
+                    {ele.status === "completed" && (
+                      <span className={style.statusCompleted}>Completed</span>
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -269,7 +306,55 @@ function DoctorAllAppoimnets() {
 
               <div className={style.dataItem}>
                 <span className={style.mobileLabel}>Action:</span>
+
                 {ele.status === "pending" ? (
+                  <div className={style.actionButtons}>
+                    <button
+                      className={`${style.actionButton} ${style.completeButton}`}
+                      onClick={() => handleApprove(ele._id)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Approve
+                    </button>
+                    <button
+                      className={`${style.actionButton} ${style.cancelButton}`}
+                      onClick={() =>
+                        handleCancel(
+                          ele._id,
+                          ele.slotBookedDate,
+                          ele.slotBookedTime
+                        )
+                      }
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Cancel
+                    </button>
+                  </div>
+                ) : null}
+
+                {ele.status === "approve" ? (
                   <div className={style.actionButtons}>
                     <button
                       className={`${style.actionButton} ${style.completeButton}`}

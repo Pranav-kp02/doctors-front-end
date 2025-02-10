@@ -187,15 +187,17 @@ function AllAppoimnets() {
                   Cancelled
                 </span>
               ) : (
-                <span
-                  className={`${style.statusBadge} ${
-                    ele.status === "completed"
-                      ? style.statusCompleted
-                      : style.statusPending
-                  }`}
-                >
-                  {ele.status}
-                </span>
+                <div>
+                  {ele.status === "pending" && (
+                    <span className={style.statusPending}>Pending</span>
+                  )}
+                  {ele.status === "approve" && (
+                    <span className={style.statusApproved}>Approved</span>
+                  )}
+                  {ele.status === "completed" && (
+                    <span className={style.statusCompleted}>Completed</span>
+                  )}
+                </div>
               )}
             </div>
 

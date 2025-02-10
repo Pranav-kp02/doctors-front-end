@@ -25,6 +25,7 @@ import DoctorAllAppoimnets from "./DoctorDash/DocComponets/DoctorAllAppoimnets";
 import DoctorProfile from "./DoctorDash/DocComponets/DoctorProfile";
 import UserList from "./AdminDash/Componets/UserList";
 import UserDetailsPage from "./AdminDash/Componets/UserDetailsPage";
+import DocPatiens from "./DoctorDash/DocComponets/DocPatiens";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="/doctor" element={<DoctorApp />}>
             <Route path="dashboard" element={<DoctorDashboad />} />
             <Route path="doc-appoiment" element={<DoctorAllAppoimnets />} />
+            <Route path="doc-patiens" element={<DocPatiens />} />
             <Route
               path="doc-appoiment/:status"
               element={<DoctorAllAppoimnets />}

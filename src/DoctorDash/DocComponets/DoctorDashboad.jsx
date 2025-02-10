@@ -124,7 +124,10 @@ function DoctorDashboad() {
             </div>
           </div>
 
-          <div className={style.topicon}>
+          <div
+            className={style.topicon}
+            onClick={() => navigate("/doctor/doc-patiens")}
+          >
             <svg
               stroke="currentColor"
               fill="currentColor"

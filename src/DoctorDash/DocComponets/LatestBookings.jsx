@@ -33,9 +33,20 @@ const LatestBookings = ({ bookings = [] }) => {
               </div>
 
               <div className={styles.statusColumn}>
-                <span className={`${styles.status} ${styles[booking.status]}`}>
-                  {booking.status}
-                </span>
+                <div>
+                  {booking.status === "pending" && (
+                    <span className={styles.statusPending}>Pending</span>
+                  )}
+                  {booking.status === "approve" && (
+                    <span className={styles.statusApproved}>Approved</span>
+                  )}
+                  {booking.status === "completed" && (
+                    <span className={styles.statusCompleted}>Completed</span>
+                  )}
+                  {booking.status === "cancelled" && (
+                    <span className={styles.cancelledBadge}>cancelled</span>
+                  )}
+                </div>
               </div>
 
               <div className={styles.dateColumn}>

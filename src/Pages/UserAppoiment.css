@@ -56,6 +56,8 @@
   font-size: 0.875rem;
   margin-top: 0.25rem;
   color: rgb(4, 157, 4);
+  display: flex;
+  gap: 5px;
 }
 
 .myAppoi-span {
@@ -99,6 +101,39 @@
   pointer-events: none;
 }
 
+.statusPending {
+  background-color: #fef3c7;
+  color: #d97706;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  width: fit-content;
+}
+
+.statusCompleted {
+  background-color: #d1fae5;
+  color: #059669;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  width: fit-content;
+}
+
+.statusApproved {
+  background-color: #3b82f6; /* Blue */
+  color: #1e40af;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  width: fit-content;
+  color: whitesmoke;
+}
 .completed-btn {
   background-color: #71ad73; /* Light gray background */
   color: #e6e6e6; /* Dark gray text */
